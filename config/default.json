@@ -1,3 +1,4 @@
 {
-    "mongoUri":"mongodb+srv://omar1997:omar1997@developerscon.msp8p.mongodb.net/devConDB?retryWrites=true&w=majority"
+    "mongoUri":"mongodb+srv://omar1997:omar1997@developerscon.msp8p.mongodb.net/devConDB?retryWrites=true&w=majority",
+    "jwtSecret":"thisismyjsonwebtokensecret"
 }
