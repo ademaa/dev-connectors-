@@ -1,4 +1,6 @@
 {
     "mongoUri":"mongodb+srv://omar1997:omar1997@developerscon.msp8p.mongodb.net/devConDB?retryWrites=true&w=majority",
-    "jwtSecret":"thisismyjsonwebtokensecret"
+    "jwtSecret":"thisismyjsonwebtokensecret",
+    "githubSercret":"a8b406d92004ae3c2a654a0a021616a50948f21b",
+    "githubClientID":"e852dfdc901b14ea860f"
 }
