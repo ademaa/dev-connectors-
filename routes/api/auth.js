@@ -18,23 +18,27 @@ router.get("/",auth,async(req,res) => {
         res.status(500).send("Server Error");
     }
 });
+
+//@route  post api/auth
+//@des    login user
+//@access public
 router.post("/",[
-    check("email","email is required").isEmail(),
-    check("password","password is required").exists()
+    check('email','email is required').isEmail(),
+    check('password','password is required').exists()
 ],async(req,res)=>{
     const errors = validationResult(req);
-    if(!errors.isEmpty){
-        res.status(401).json({errors:errors.array()});
+    if(!errors.isEmpty()){
+       return  res.status(400).json({errors:errors.array()});
     }
     const {email,password} = req.body;
     try{
-        const user = await User.findOne({email});
+        let user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({msg:"invalid credintials"});
+            return res.status(400).json({errors:[{msg:"invalid credintials"}]});
         }
         const isMatch = await bcrypt.compare(password,user.password);
         if(!isMatch){
-            return res.status(400).json({msg:"invalid credintials"});
+            return res.status(400).json({errors:[{msg:"invalid credintials"}]});
         }
         const payload = {
             user:{
@@ -46,7 +50,7 @@ router.post("/",[
             {expiresIn:360000},
             (err,token)=>{
             if(err) throw err;
-            res.send(token);
+            res.json({token});
         })
     }catch(err){
         console.error(err.message);
