@@ -51,6 +51,9 @@ const ProfilSchema  = new mongoose.Schema({
             current:{
                 type:Boolean,
                 default:false
+            },
+            description:{
+                type:String
             }
         }
     ],
@@ -74,9 +77,13 @@ const ProfilSchema  = new mongoose.Schema({
             grade:{
                 type:String
             },
-            Description:{
+            description:{
                 type:String
-            }
+            },
+            current:{
+                type:Boolean,
+                default:false
+            },
         }
     ],
     certifications:[{
@@ -98,6 +105,9 @@ const ProfilSchema  = new mongoose.Schema({
         expiration:{
             type:Boolean,
             default:false
+        },
+        description:{
+            type:String
         }
     }],
     social:{

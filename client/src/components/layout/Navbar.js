@@ -7,6 +7,12 @@ import PropTypes from 'prop-types';
 const Navbar = ({auth:{isAuthanticated,loading},logout}) =>{ 
   const authList =(
     <ul>
+    <li>
+      <Link to="/profiles">Developers</Link>
+    </li>
+    <li>
+      <Link to="/posts">Posts</Link>
+    </li>
   <li><Link onClick={logout} to="/">
   <i className="fas fa-sign-out-alt"></i>{' '}
   <span className='hide-sm'>logout</span></Link></li>
@@ -14,7 +20,9 @@ const Navbar = ({auth:{isAuthanticated,loading},logout}) =>{
   );
   const guestList =(
 <ul>
-  <li><Link to="#!">Developers</Link></li>
+<li>
+      <Link to="/profiles">Developers</Link>
+    </li>
   <li><Link to="/register">Register</Link></li>
   <li><Link to="/login">Login</Link></li>
 </ul>

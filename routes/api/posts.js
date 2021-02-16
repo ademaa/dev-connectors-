@@ -10,7 +10,7 @@ const User = require('../../models/User');
 //@des    post a new post
 //@access private
 router.post("/",[auth,[
-    check('text','text is required').not().isEmpty()
+    check('text','you can not write nothing').not().isEmpty()
 ]],async(req,res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -176,9 +176,12 @@ router.delete("/comment/:id/:comment_id",auth,async(req,res)=>{
            return res.status(401).json({msg:"user is not authorized"});
        }
        const removeIndex = post.comments.map(comment=>comment.user.toString()).indexOf(req.user.id);
-       post.comments.splice(removeIndex,1);
-       await post.save();
-       res.json(post.comments);
+       
+        post.comments.splice(removeIndex,1);
+        await post.save();
+        res.json(post.comments);
+       
+       
     } catch (err) {
         console.error(err.message);
         res.status(500).send("server error");

@@ -5,6 +5,7 @@ const request = require('request');
 const auth  = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User  = require('../../models/User');
+const Post  = require('../../models/Post');
 const {check,validationResult} = require('express-validator');
 const { rawListeners } = require('../../models/Profile');
 //@route  GET api/profile/me
@@ -125,6 +126,8 @@ router.get("/user/:user_id",async(req,res)=>{
 //@access public
 router.delete("/",auth,async(req,res)=>{
     try {
+        //remove posts
+        await Post.deleteMany({user:req.user.id});
         //remove profile
          await Profile.findOneAndRemove({user:req.user.id});
          //remove user 
@@ -253,7 +256,7 @@ router.put("/certifications",[auth,[
     if(!errors.isEmpty()){
         return res.status(400).json({errors:errors.array()});
     };
-    const {school,
+    const {
         name,
         start,
         end,
@@ -277,7 +280,7 @@ router.put("/certifications",[auth,[
         res.status(500).send("server error");
     }
 });
-//@route  DELETE api/profile/certifications/:cer_id
+//@route  DELETE api/profile//:cer_id
 //@des    remove certifications
 //@access private
 router.delete('/certifications/:cer_id',auth,async(req,res)=>{
